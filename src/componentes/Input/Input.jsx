@@ -4,7 +4,10 @@ function Input(props){
     return(
         <>
         <p>{props.def}</p>
-        <input type={props.type}/>
+        <input type={props.type}  
+        placeholder={props.placeholder} 
+        value={props.value}
+        onChange={props.onChange}/>
         </>
     )
 }
