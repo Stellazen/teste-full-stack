@@ -3,3 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+:root{
+  --marrom: #59211C;
+  --laranja: #BF5D39;
+  --laranjaClaro: #F29966;
+  --azulEscuro: #091326;
+  --azulClaro: #84AEBF;
+}
