@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../componentes/Input/Input";
-import Button from "../../componentes/Input/Button/Button";
+import Button from "../../componentes/Button/Button";
+import Header from "../../componentes/Header/Header";
 import styles from "./Login.module.css"
 
 function Login() {
@@ -17,7 +18,7 @@ function Login() {
 
   const handleLogin = () => {
 
-    
+
     // Aqui você pode adicionar a lógica para realizar o login com email e senha
     console.log("Email:", email);
     console.log("Senha:", password);
@@ -30,6 +31,7 @@ function Login() {
 
   return (
     <section className={styles.body}>
+        <Header />
       <section className={styles.form}>
       <Input
         type="text"
@@ -43,8 +45,9 @@ function Login() {
         value={password}
         onChange={handlePasswordChange} // Adicione o evento onChange
         />
-        <Button onClick={handleLogin}>Entrar</Button> {/* Usar onClick para ação de login */}
-        <Button onClick={handleCadastro}>Fazer Cadastro</Button> {/* Usar onClick para ação de cadastro */}
+        <Button onClick={handleLogin}>Entrar</Button> 
+        <Button>Entrar com o Google</Button>
+        <Button onClick={handleCadastro}>Fazer Cadastro</Button> 
       </section>
     </section>
   );
