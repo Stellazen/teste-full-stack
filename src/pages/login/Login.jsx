@@ -30,26 +30,28 @@ function Login() {
   };
 
   return (
-    <section className={styles.body}>
+    <>
         <Header />
-      <section className={styles.form}>
-      <Input
-        type="text"
-        placeholder="Digite seu email"
-        value={email}
-        onChange={handleEmailChange} // Adicione o evento onChange
-        />
-        <Input
-        type="password"
-        placeholder="Digite sua senha"
-        value={password}
-        onChange={handlePasswordChange} // Adicione o evento onChange
-        />
-        <Button onClick={handleLogin}>Entrar</Button> 
-        <Button>Entrar com o Google</Button>
-        <Button onClick={handleCadastro}>Fazer Cadastro</Button> 
-      </section>
-    </section>
+        <section className={styles.body}>
+            <section className={styles.form}>
+            <Input
+                type="text"
+                placeholder="Digite seu email"
+                value={email}
+                onChange={handleEmailChange} 
+                />
+                <Input
+                type="password"
+                placeholder="Digite sua senha"
+                value={password}
+                onChange={handlePasswordChange} 
+                />
+                <Button onClick={handleLogin}>Entrar</Button> 
+                <Button>Entrar com o Google</Button>
+                <Button onClick={handleCadastro}>Fazer Cadastro</Button> 
+            </section>
+        </section>
+    </>
   );
 }
 
