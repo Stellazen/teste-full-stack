@@ -1,6 +1,14 @@
 
 .background{
     background-color: #59211C;
-    height: 80px;
+    height: 120px;
     width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title{
+    color: white;
+    font-weight: 400;
 }

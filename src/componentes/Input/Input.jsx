@@ -1,10 +1,11 @@
 import React from "react";
+import styles from "./Input.module.css"
 
 function Input(props){
     return(
         <>
-        <p>{props.def}</p>
-        <input type={props.type}  
+        <input className={styles.input}
+        type={props.type}  
         placeholder={props.placeholder} 
         value={props.value}
         onChange={props.onChange}/>
