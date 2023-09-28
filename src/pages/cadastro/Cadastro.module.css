@@ -1,0 +1,48 @@
+@import "../../index.css";
+
+.body{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e2c1ae;
+}
+
+.form{
+    margin-top: 20px;
+    width: 300px;
+    height: 500px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    background-image: url('../../assets/cerveja.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: 0.5s;
+}
+
+.msgErro{
+    height: 10px;
+}
+
+.pError{
+    font-size: 10px;
+}
+
+.pSucess{
+    font-weight: 500;
+    color: var(--marrom);
+    background-color: rgba(250, 235, 215, 0.425);
+    border-radius: 5px;
+}
+
+@media (min-width: 600px) {
+    .form{
+        width: 450px;
+    }
+}

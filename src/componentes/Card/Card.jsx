@@ -4,10 +4,13 @@ function Card(props){
     return(
     <section key={props.key} className={styles.container}>
         <h1>{props.name}</h1>
-        <p>{props.description}</p>
+        <p>Firts Brewed: {props.data}</p>
         <img className={styles.imagem} src={props.image} alt="foto da cerveja"/>
         <p>{props.tipe}</p>
-        <p>IBU :{props.ibu}</p>
+        <div className={styles.types}>
+            <p>IBU: {props.ibu}</p>
+            <p>ABV: {props.abv}</p>
+        </div>
     </section>
     )
 }
