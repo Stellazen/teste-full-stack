@@ -1,32 +1,49 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../../componentes/Input/Input";
 import Button from "../../componentes/Button/Button";
 import Header from "../../componentes/Header/Header";
 import styles from "./Login.module.css"
+import { googleLogin, valuesLogin } from "../../servicesFirebase/firebaseAuth";
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
+  const navigate = useNavigate();
+
   const handleLogin = () => {
-
-
-    // Aqui você pode adicionar a lógica para realizar o login com email e senha
-    console.log("Email:", email);
-    console.log("Senha:", password);
+    valuesLogin(email, password)
+    .then(()=> {
+      navigate('/dados');
+    })
+    .catch((error) => {
+      setError("Erro ao fazer o login ", error)
+    })
   };
 
+   const handleLoginGoogle = () => {
+    googleLogin()
+    .then(() => {
+      navigate('/dados');
+    })
+    .catch((error) => {
+      setError("Erro ao fazer login com o Google:", error);
+    });
+   }
+
+  
   const handleCadastro = () => {
-    // Aqui você pode adicionar a lógica para realizar o cadastro do usuário
-    console.log("Cadastrar usuário");
+    navigate('/Cadastro');
+
   };
 
   return (
@@ -36,19 +53,26 @@ function Login() {
             <section className={styles.form}>
             <Input
                 type="text"
-                placeholder="Digite seu email"
+                placeholder="Email"
                 value={email}
                 onChange={handleEmailChange} 
                 />
                 <Input
                 type="password"
-                placeholder="Digite sua senha"
+                placeholder="Password"
                 value={password}
                 onChange={handlePasswordChange} 
                 />
-                <Button onClick={handleLogin}>Entrar</Button> 
-                <Button>Entrar com o Google</Button>
-                <Button onClick={handleCadastro}>Fazer Cadastro</Button> 
+                <div className={styles.msgErro}>
+                  {error && <p className={styles.pError}>{error}</p>}
+                </div>
+                <div className={styles.login}>
+                  <Button onClick={handleLogin}>Login</Button>
+                  <button onClick={handleLoginGoogle} className={styles.google}>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" />
+                  </button>
+                </div>
+                <Button onClick={handleCadastro}>Register</Button> 
             </section>
         </section>
     </>

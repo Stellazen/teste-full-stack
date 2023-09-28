@@ -18,21 +18,22 @@ function BeerList() {
   }, []);
 
   return (
+    <>
+    <Header />
     <div className={styles.body}>
-      <Header />
-      <ul>
         {beers.map((beer, index) => (
           <Card 
           key = {index}
           name = {beer.name}
-          description = {beer.description}
+          data = {beer.first_brewed}
           image =  {beer.image_url}
           tipe = {beer.brewers_tips}
           ibu = {beer.ibu}
+          abv = {beer.abv}
           />
         ))}
-      </ul>
     </div>
+    </>
   );
 }
 
