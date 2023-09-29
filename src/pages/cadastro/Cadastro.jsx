@@ -5,6 +5,7 @@ import Input from "../../componentes/Input/Input";
 import Button from "../../componentes/Button/Button";
 import styles from "./Cadastro.module.css";
 import { createUser } from "../../servicesFirebase/firebaseAuth";
+import errorMessage from "../ErrorMessages/ErrorMessages";
 
 function Cadastro() {
   const [email, setEmail] = useState('');
@@ -24,19 +25,27 @@ function Cadastro() {
   };
 
   const handleCadastro = () => {
+    if (password.length < 6) {
+      setError('A senha deve ter pelo menos 6 caracteres.');
+      setIsSuccess(false); 
+      return;
+    }
+
     createUser(email, password, displayName)
       .then(() => {
-        setIsSuccess(true);
-        setError('');
+        setIsSuccess(true); 
+        setError(''); 
+        console.log('cadastrado')
       })
       .catch((error) => {
-        setError('Erro ao criar usuário: ' + error.message);
-        setIsSuccess(false);
+        setError('Erro: ' + errorMessage(error));
+        setIsSuccess(false); 
       });
   };
 
   const handleBack = () =>{
     navigate('/');
+    logOut(auth);
   }
 
   return (

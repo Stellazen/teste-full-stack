@@ -6,3 +6,8 @@
     justify-content: center;
     flex-wrap: wrap;
 }
+
+.btnLogout{
+    background-color: #e2c1ae;
+    padding: 10px;
+}

@@ -5,6 +5,7 @@ import Button from "../../componentes/Button/Button";
 import Header from "../../componentes/Header/Header";
 import styles from "./Login.module.css"
 import { googleLogin, valuesLogin } from "../../servicesFirebase/firebaseAuth";
+import errorMessage from "../ErrorMessages/ErrorMessages";
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -26,7 +27,7 @@ function Login() {
       navigate('/dados');
     })
     .catch((error) => {
-      setError("Erro ao fazer o login ", error)
+      setError("Erro: " + errorMessage(error))
     })
   };
 
@@ -36,15 +37,15 @@ function Login() {
       navigate('/dados');
     })
     .catch((error) => {
-      setError("Erro ao fazer login com o Google:", error);
+      setError("Erro: " + errorMessage(error));
     });
    }
 
-  
   const handleCadastro = () => {
     navigate('/Cadastro');
 
   };
+  
 
   return (
     <>

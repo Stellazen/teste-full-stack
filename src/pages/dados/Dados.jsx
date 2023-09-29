@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../componentes/Header/Header';
 import Card from '../../componentes/Card/Card';
 import styles from './Dados.module.css';
+import Button from '../../componentes/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 function BeerList() {
   const [beers, setBeers] = useState([]);
@@ -17,9 +19,19 @@ function BeerList() {
       });
   }, []);
 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate('/')
+
+  }
+
   return (
     <>
     <Header />
+    <div className={styles.btnLogout}>
+        <Button onClick={handleLogout}>Logout</Button>
+      </div>
     <div className={styles.body}>
         {beers.map((beer, index) => (
           <Card 
