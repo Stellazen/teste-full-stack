@@ -6,7 +6,6 @@ import {
     GoogleAuthProvider,
     getAuth,
     signOut,
-    onAuthStateChanged,
     updateProfile,
   } from 'firebase/auth';
   import { firebaseConfig } from './firebaseconfig';
@@ -29,5 +28,6 @@ import {
   export const valuesLogin = (email, senha) => signInWithEmailAndPassword(auth, email, senha);
   
   // Sair do perfil do usuário 
-  export const sairPerfil = () => signOut(auth);
+  export const logOut = () => signOut(auth);
+
   

@@ -43,6 +43,12 @@
     background-color: transparent;
     padding: 3px;
     cursor: pointer;
+    transition: 0.5s;
+}
+
+.google:hover{
+    background-color: var(--azulEscuro);
+    border: 1px solid var(--azulEscuro);
 }
 
 .pError{
