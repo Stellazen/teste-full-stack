@@ -12,8 +12,8 @@ dist
 dist-ssr
 *.local
 
-# Ignore o arquivo firebaseKey.json
-firebaseKey.json
+# Ignore o arquivo serviceAccount.json
+serviceAccount.json
 
 # Editor directories and files
 .vscode/*
