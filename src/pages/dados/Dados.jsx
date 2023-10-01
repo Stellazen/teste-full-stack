@@ -31,6 +31,7 @@ function BeerList() {
     <Header />
     <div className={styles.btnLogout}>
         <Button onClick={handleLogout}>Logout</Button>
+        <p className={styles.catalog}>Catalog:</p>
       </div>
     <div className={styles.body}>
         {beers.map((beer, index) => (
