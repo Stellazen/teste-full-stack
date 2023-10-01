@@ -4,6 +4,7 @@ import Card from '../../componentes/Card/Card';
 import styles from './Dados.module.css';
 import Button from '../../componentes/Button/Button';
 import { useNavigate } from 'react-router-dom';
+import { logOut } from '../../servicesFirebase/firebaseAuth';
 
 function BeerList() {
   const [beers, setBeers] = useState([]);
@@ -22,8 +23,8 @@ function BeerList() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    logOut();
     navigate('/')
-
   }
 
   return (
