@@ -27,7 +27,8 @@
 }
 
 .msgErro{
-    height: 10px;
+    height: 15px;
+    
 }
 
 .login{
@@ -53,6 +54,10 @@
 
 .pError{
     font-size: 10px;
+    background-color: #091326b0;
+    color:white;
+    padding: 3px;
+    border-radius: 5px;
 }
 
 
