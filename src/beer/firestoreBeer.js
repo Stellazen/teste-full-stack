@@ -1,1 +1,0 @@
-// funções do firestore

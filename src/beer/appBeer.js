@@ -1,7 +1,6 @@
 import express from "express";
 import admin from 'firebase-admin';
 import { addDoc, collection, doc, updateDoc, deleteDoc } from "firebase/firestore";
-import serviceAccount from "./firebaseKey.json" assert { type: "json" };
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
