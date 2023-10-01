@@ -22,7 +22,6 @@ app.get('/beers', async (request, response) => {
 
     try {
         await admin.auth().verifyIdToken(jwt, true);
-
         console.log('GET beers');
         db.collection('beers')
             .orderBy('date', 'desc')
