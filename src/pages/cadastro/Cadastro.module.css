@@ -35,10 +35,12 @@
 }
 
 .pSucess{
+    margin-top: 10px;
     font-weight: 500;
     color: var(--marrom);
-    background-color: rgba(250, 235, 215, 0.425);
-    border-radius: 5px;
+    background-color: #84aebf8c;
+    border-radius: 10px;
+    padding: 5px;
 }
 
 @media (min-width: 600px) {

@@ -1,6 +1,7 @@
 import express from "express";
 import admin from 'firebase-admin';
 import { addDoc, collection, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import serviceAccount from './serviceAccount.json' assert { type: 'json' };
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -19,26 +20,27 @@ app.get('/beers', async (request, response) => {
         return;
     }
 
-    let decodedId = "";
     try {
-        decodedId = await admin.auth().verifyIdToken(jwt, true);
-    } catch (e) {
-        response.status(401).json({ message: "Usuário não autorizado" });
-        return;
-    }
+        await admin.auth().verifyIdToken(jwt, true);
 
-    console.log('GET beers');
-    db.collection('beers')
-        .where('user.uid', '==', decodedId.uid)  
-        .orderBy('date', 'desc')
-        .get()
-        .then(snapshot => {
-            const beers = snapshot.docs.map(doc => ({
-                ...doc.data(),
-                uid: doc.id
-            }));
-            response.json(beers);  
-        })
+        console.log('GET beers');
+        db.collection('beers')
+            .orderBy('date', 'desc')
+            .get()
+            .then(snapshot => {
+                const beers = snapshot.docs.map(doc => ({
+                    ...doc.data(),
+                    uid: doc.id
+                }));
+                response.json(beers);  
+            })
+            .catch(error => {
+                console.error('Erro ao obter cervejas do Firestore', error);
+                response.status(500).send('Erro interno ao obter cervejas');
+            });
+    } catch (error) {
+        response.status(401).json({ message: "Usuário não autorizado" });
+    }
 });
 
 function validateBeer(req, res, next) {
@@ -78,7 +80,6 @@ app.put('/beers/:id', validateBeer, async (req, res) => {
         const beerId = req.params.id;
         const { data, abv, nome, id, ibu, tipo, uid } = req.body;
 
-        // Atualizar os dados da cerveja no Firestore usando o id
         await updateDoc(doc(db, 'beers', beerId), {
             data,
             abv,
@@ -99,8 +100,6 @@ app.put('/beers/:id', validateBeer, async (req, res) => {
 app.delete('/beers/:id', validateBeer, async (req, res) => {
     try {
         const beerId = req.params.id;
-
-        // Exclua a cerveja do Firestore usando o ID
         await deleteDoc(doc(db, 'beers', beerId));
 
         res.status(200).send('Cerveja excluída com sucesso');
@@ -111,4 +110,4 @@ app.delete('/beers/:id', validateBeer, async (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`API iniciada em http://${port}`));
+app.listen(port, () => console.log(`API iniciada em http://localhost:${port}`));
