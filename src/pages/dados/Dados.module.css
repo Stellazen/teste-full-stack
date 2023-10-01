@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;1,400;1,600&display=swap');
 
+@import '../../index.css';
+
 .body{
     background-color: #e2c1ae;
     display: flex;
@@ -10,4 +12,9 @@
 .btnLogout{
     background-color: #e2c1ae;
     padding: 10px;
+}
+
+.catalog{
+    font-size: 25px;
+    color: var(--azulEscuro);
 }

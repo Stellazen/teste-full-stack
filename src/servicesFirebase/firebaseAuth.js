@@ -7,6 +7,7 @@ import {
     getAuth,
     signOut,
     updateProfile,
+    onAuthStateChanged,
   } from 'firebase/auth';
   import { firebaseConfig } from './firebaseconfig';
 
@@ -30,4 +31,9 @@ import {
   // Sair do perfil do usuário 
   export const logOut = () => signOut(auth);
 
-  
+  // Ouvir alterações no estado de autenticação
+onAuthStateChanged(auth, user => {
+  if (user) {
+      user.getIdToken().then(token => console.log(token));
+  }
+});
