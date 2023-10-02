@@ -11,12 +11,12 @@ Depois de logado, o usuário da aplicação web deve poder acessar os dados da [
 ## Sobre o Projeto:
 
 ### Front-end 🎨
-O Front-end foi desenvolvido em Mobile First usando React e CSS Module.
-A Autenticação foi implementada com Firebase e existe a possibilidade de cadastrar e entrar com login e senha ou utilizando uma conta google.
-Mensagens de erro foram implementadas nas telas de login e cadastro.
+O Front-end foi desenvolvido em Mobile First usando React e CSS Module.<br/>
+A Autenticação foi implementada com Firebase e existe a possibilidade de cadastrar e entrar com login e senha ou utilizando uma conta google.<br/>
+Mensagens de erro foram implementadas nas telas de login e cadastro.<br/>
 Ao logar o usuário tem acesso aos dados da Punk Api exibidos por padrão em uma ordenação de maior para menor IBU (amargor da cerveja), podendo também serem exibidos em uma ordenação de maior para menor ABV (teor alcoólico).
 
 ### Back-end 💻 - incompleto -
-O Back-End foi desenvolvido em Node, utilizando a biblioteca Express e o Firestore para armazenamento dos dados. 
+O Back-End foi desenvolvido em Node, utilizando a biblioteca Express e o Firestore para armazenamento dos dados. <br/>
 Para fazer requisições para a API o usuário deve possuir um token de autenticação gerado pelo Front End no momento de login, deixando os dados protegido apenas a quem tiver uma conta na aplicação.
   
