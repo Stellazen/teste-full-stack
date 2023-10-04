@@ -13,7 +13,28 @@ app.use(express.json());
 
 const db = admin.firestore();  
 
-app.get('/beers', async (request, response) => {
+//função de pegar apenas um item do banco de dados. 
+//Funciona mas só se não tiver a autentiação por jwt
+app.get('/beers/:id', async (request, response) => {
+    const beerId = request.params.id;
+
+    try {
+        const snapshot = await db.collection('beers').doc(beerId).get();
+
+        const beer = {
+            ...snapshot.data(),
+            uid: snapshot.id
+        };
+
+        response.json(beer);
+    } catch (error) {
+        console.error('Erro ao obter cerveja por ID:', error);
+        response.status(500).send('Erro interno ao obter cerveja por ID');
+    }
+});
+
+//Função de pegar todos os itens do banco de dados, retorna 200 mas não retorna os itens
+app.get('/beers',(request, response) => {
     const jwt = request.headers.authorization;
     if (!jwt) {
         response.status(401).json({ message: "Usuário não autorizado" });
@@ -21,9 +42,9 @@ app.get('/beers', async (request, response) => {
     }
 
     try {
-        await admin.auth().verifyIdToken(jwt, true);
+        admin.auth().verifyIdToken(jwt, true);
         console.log('GET beers');
-        db.collection('beers')
+         db.collection('beers')
             .orderBy('date', 'desc')
             .get()
             .then(snapshot => {
@@ -31,11 +52,7 @@ app.get('/beers', async (request, response) => {
                     ...doc.data(),
                     uid: doc.id
                 }));
-                response.json(beers);  
-            })
-            .catch(error => {
-                console.error('Erro ao obter cervejas do Firestore', error);
-                response.status(500).send('Erro interno ao obter cervejas');
+                response.json(beers);
             });
     } catch (error) {
         response.status(401).json({ message: "Usuário não autorizado" });
@@ -43,9 +60,9 @@ app.get('/beers', async (request, response) => {
 });
 
 function validateBeer(req, res, next) {
-    const { data, abv, nome, id, ibu, tipo, uid } = req.body;
+    const { data, abv, nome, id, ibu, tipo} = req.body;
 
-    if (!data || !abv || !nome || !id || !ibu || !tipo || !uid) {
+    if (!data || !abv || !nome || !id || !ibu || !tipo ) {
         return res.status(400).send('Todos os campos são obrigatórios.');
     }
 
@@ -54,7 +71,7 @@ function validateBeer(req, res, next) {
 
 app.post('/beers', validateBeer, async (req, res) => {
     try {
-        const { data, abv, nome, id, ibu, tipo, uid } = req.body;
+        const { data, abv, nome, id, ibu, tipo } = req.body;
         const docRef = await addDoc(collection(db, 'beers'), {
             data,
             abv,
@@ -62,7 +79,6 @@ app.post('/beers', validateBeer, async (req, res) => {
             id,
             ibu,
             tipo,
-            uid,
         });
 
         console.log('Cerveja adicionada com ID:', docRef.id);
@@ -77,7 +93,7 @@ app.post('/beers', validateBeer, async (req, res) => {
 app.put('/beers/:id', validateBeer, async (req, res) => {
     try {
         const beerId = req.params.id;
-        const { data, abv, nome, id, ibu, tipo, uid } = req.body;
+        const { data, abv, nome, id, ibu, tipo } = req.body;
 
         await updateDoc(doc(db, 'beers', beerId), {
             data,
@@ -86,7 +102,6 @@ app.put('/beers/:id', validateBeer, async (req, res) => {
             id,
             ibu,
             tipo,
-            uid,
         });
 
         res.status(200).send('Cerveja atualizada com sucesso');
@@ -110,3 +125,4 @@ app.delete('/beers/:id', validateBeer, async (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`API iniciada em http://localhost:${port}`));
+

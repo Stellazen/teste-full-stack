@@ -24,7 +24,6 @@ function BeerList() {
   }, []);
 
   useEffect(() => {
-    // Função para ordenar cervejas com base no critério selecionado
     const sortBeers = () => {
       let sorted = [...beers];
 
